@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Logon from './composants/user/Logon.jsx'
 import { Toaster } from 'react-hot-toast'
+import Dashboard from './admin/Dashboard.jsx'
 
 const route=createBrowserRouter([
   {
