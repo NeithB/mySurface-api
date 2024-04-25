@@ -1,0 +1,18 @@
+package shaks.trimer.mySurface.services.objectSerciceInterface;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public interface ObjectService <T>{
+    T creer(T t);
+     List<T>getAll();
+    T modifier(T t, Long id);
+    void supprimer(Long id);
+    T searchById(Long id);
+
+    T searchByLogin(String login);
+
+
+}
