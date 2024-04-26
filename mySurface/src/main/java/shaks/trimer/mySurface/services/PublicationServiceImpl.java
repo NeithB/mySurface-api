@@ -51,5 +51,10 @@ public class PublicationServiceImpl implements ObjectService<Publication>{
         return null;
     }
 
+    @Override
+    public Publication findByLoginAndMdp(String l, String m) {
+        return null;
+    }
+
 
 }

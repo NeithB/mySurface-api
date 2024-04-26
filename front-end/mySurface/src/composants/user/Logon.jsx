@@ -1,21 +1,36 @@
 import React, { useState } from 'react'
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
-import { createUser } from '../../axios/UserService';
+import { byLogin, createUser } from '../../axios/UserService';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { SystemUpdateOutlined } from '@mui/icons-material';
 
 
 export default function Logon() {
 
 const {register,handleSubmit,watch,formState: { errors }}=useForm();
+ const navigator=useNavigate();
 
 const onSubmit=(data)=>{
-      createUser(data).then((res)=>{
-        console.log(res,errors) 
-        toast.success("Succes sign up")     
-      }).catch((error)=>{
-        toast.error("une erreur est survenue")
-      })
+
+        byLogin(data.login).then((res)=>{
+          console.log(res.data.login)
+          if(res.data.login!=data.login){
+            createUser(data).then((res)=>{
+              console.log(res,errors) 
+              navigator("/")
+              toast.success("Succes sign up")    
+            }).catch((error)=>{
+              toast.error("une erreur est survenue")
+            })
+          }else{
+            toast.error("Ce compte existe déja ")         
+
+          }
+        })
+       
+      
           
 }
 

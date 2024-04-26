@@ -49,4 +49,9 @@ public class UserServiceImpl implements ObjectService<User> {
     public User searchByLogin(String login) {
         return this.userRepository.findByLogin(login);
     }
+
+    @Override
+    public User findByLoginAndMdp(String l, String m) {
+        return userRepository.findByLoginAndMdp(l,m);
+    }
 }

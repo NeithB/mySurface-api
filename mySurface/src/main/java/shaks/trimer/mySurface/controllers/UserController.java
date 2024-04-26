@@ -1,5 +1,6 @@
 package shaks.trimer.mySurface.controllers;
 
+import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,18 @@ public class UserController {
     @DeleteMapping("delete/{id}")
     public void deleteUser(@PathVariable Long id){
         userService.supprimer(id);
+    }
+
+    @PostMapping("/connexion/{login}/{mdp}")
+    public User connexion(@PathVariable String login, @PathVariable String mdp){
+        User user=userService.findByLoginAndMdp(login,mdp);
+
+        String issuer=user.id.toString();
+
+
+
+
+        return null;
     }
 
 
