@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Logon from './composants/user/Logon.jsx'
 import { Toaster } from 'react-hot-toast'
 import Dashboard from './admin/Dashboard.jsx'
+import Interface from './composants/home/Interface.jsx'
 
 const route=createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const route=createBrowserRouter([
   },
   {
     path:"/update/:id"
+  },
+  {
+    path:"/interface",
+    element:<Interface/>
   }
 
 ])

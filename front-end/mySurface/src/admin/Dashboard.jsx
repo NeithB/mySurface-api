@@ -5,11 +5,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import toast from 'react-hot-toast';
 import Person3Icon from '@mui/icons-material/Person3';
+import { isLogged } from '../connexionServices/connexionService';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
 
     const [users, setUsers]=useState([])
-
+    const navigator=useNavigate()
     function getAllUsers(){
         getUsers().then((response)=>{
             setUsers(response.data)
@@ -22,6 +24,9 @@ export default function Dashboard() {
 
     useEffect(()=>{
         getAllUsers();
+        if(!isLogged()){
+          navigator("/")
+        }
     },[])
 
     function deleteUser(id){

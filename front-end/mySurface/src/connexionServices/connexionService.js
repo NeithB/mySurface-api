@@ -1,15 +1,15 @@
 
 
-export const saveToken=(token)=>{
-    localStorage.setItem('token',token)
+export const saveToken=(value)=>{
+    localStorage.setItem('user',JSON.stringify(value))
 }
 
 export const logout=()=>{
-    localStorage.removeItem('token')
+    localStorage.removeItem('user')
 }
 
 export const isLogged=()=>{
-    const token=localStorage.getItem('token');
+    const token=localStorage.getItem('user');
     return !!token
 }
 

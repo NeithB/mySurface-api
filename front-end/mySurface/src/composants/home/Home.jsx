@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { blue } from '@mui/material/colors'
-import { Message } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { connect } from '../../axios/UserService';
 import toast from 'react-hot-toast';
-import { isLogged, logout, saveToken } from '../../connexionServices/connexionService';
+import { saveToken } from '../../connexionServices/connexionService';
 
 
 
@@ -16,19 +14,19 @@ export default function Home() {
 
 const {register, handleSubmit,formState: { errors }} = useForm();
 
+
+
+
 const onSubmit=(data)=>{
-    console.log(data.login, data.mdp);
 
     connect(data.login,data.mdp).then((res)=>{
-        
-        if(res.data){          
-            saveToken(res.data)
-            console.log(isLogged())        
+      
+        if(res.data){                
+            saveToken(res.data)                       
             toast.success("You are connected")
+
         }else{
             toast.error("Login Or Password not found")
-            logout()
-            console.log(isLogged())  
         }
        
     }).catch((error)=>{
@@ -38,15 +36,12 @@ const onSubmit=(data)=>{
 
 }
 
+
 const navigator=useNavigate();
 
 function signUp(){
-    
-    if(isLogged()){
+     
        navigator("/logon")
-    }else{
-        logout();
-    }
         
 }
 
@@ -77,7 +72,7 @@ function signUp(){
                  <form style={{marginTop:"10px"}} onSubmit={handleSubmit(onSubmit)} >
                     <Stack direction={'column'} gap={1}>                         
                         <TextField 
-                        id="outlined-basic" 
+                        id="" 
                         variant="outlined"
                         placeholder='email or phone'
                         {...register("login",{
@@ -89,7 +84,7 @@ function signUp(){
                         fullWidth />
 
                         <TextField 
-                        id="outlined-basic"                   
+                        id=""                   
                         variant="outlined"
                         type="password"
                         placeholder='Password'
