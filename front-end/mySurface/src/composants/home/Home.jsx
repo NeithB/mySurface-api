@@ -13,16 +13,15 @@ import { saveToken } from '../../connexionServices/connexionService';
 export default function Home() {
 
 const {register, handleSubmit,formState: { errors }} = useForm();
-
-
-
+const navigator=useNavigate();
 
 const onSubmit=(data)=>{
 
     connect(data.login,data.mdp).then((res)=>{
       
         if(res.data){                
-            saveToken(res.data)                       
+            saveToken(res.data)  
+            navigator("/interface")                   
             toast.success("You are connected")
 
         }else{
@@ -37,7 +36,7 @@ const onSubmit=(data)=>{
 }
 
 
-const navigator=useNavigate();
+
 
 function signUp(){
      

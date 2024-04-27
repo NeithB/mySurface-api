@@ -31,9 +31,10 @@ public class Publication {
     private int nbreLike;
 
     @Column
-    public String url;
+    private String url;
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    public User user;
+    private User user;
 }
+
