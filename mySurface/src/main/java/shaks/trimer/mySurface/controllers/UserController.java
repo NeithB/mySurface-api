@@ -1,6 +1,5 @@
 package shaks.trimer.mySurface.controllers;
 
-import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
@@ -51,14 +50,7 @@ public class UserController {
 
     @PostMapping("/connexion/{login}/{mdp}")
     public User connexion(@PathVariable String login, @PathVariable String mdp){
-        User user=userService.findByLoginAndMdp(login,mdp);
-
-        String issuer=user.id.toString();
-
-
-
-
-        return null;
+        return userService.findByLoginAndMdp(login,mdp);
     }
 
 

@@ -16,11 +16,11 @@ public class PublicationController {
 
     public final PublicationServiceImpl publicationService;
 
-    @PostMapping("create")
+    @PostMapping
     public Publication createPb(@RequestBody Publication pb){
         return publicationService.creer(pb);
     }
-    @GetMapping("list")
+    @GetMapping
     public List<Publication> listPb(){
         return publicationService.getAll();
     }

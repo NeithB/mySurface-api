@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -21,6 +23,12 @@ public class Publication {
     @Column
     @Size(min=2, message = "saisir au moins 6 caracteres")
     public String message;
+
+    @Column
+    private LocalDate datePub=LocalDate.now();
+
+    @Column
+    private int nbreLike;
 
     @Column
     public String url;
