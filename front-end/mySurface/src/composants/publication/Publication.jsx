@@ -44,9 +44,9 @@ useEffect(()=>{
     <Box>
         <Box height={"100vh"} >
                
-                <Typography variant='h4'>Share your day</Typography>
+                
             <Stack  
-                    width={"60%"} 
+                    width={"50%"} 
                     alignItems={"center"} 
                     margin={"auto"} 
                     padding={"10px"}
@@ -54,8 +54,10 @@ useEffect(()=>{
                     gap={5}
                     
                     >
+                
                 <Box width={"100%"} bgcolor={"#F1F1F1"} padding={2} >
                     <form onSubmit={handleSubmit(onSubmit)} >
+                    <Typography variant='h3'>Share your day</Typography>
                         <TextField id="outlined-basic" 
                         label="Parlez de votre journée" 
                         variant="outlined"
