@@ -1,12 +1,11 @@
 package shaks.trimer.mySurface.modeles;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+//
 public class User {
 
     @Id
@@ -50,17 +51,12 @@ public class User {
     @Column
     public String statut="Client";
 
-    @OneToMany(mappedBy = "user")
-    public List<Publication> publicationList;
+//    @OneToMany(mappedBy = "user")
+//
+//    public List<Publication> publicationList;
 
 
-    public void addPublication(Publication publication){
-        if(publicationList==null){
-            publicationList=new ArrayList<>();
-        }
-        publication.setUser(this);
-        publicationList.add(publication);
-    }
+
 
 
 }
