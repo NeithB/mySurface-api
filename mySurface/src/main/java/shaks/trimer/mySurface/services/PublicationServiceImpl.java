@@ -26,6 +26,11 @@ public class PublicationServiceImpl implements ObjectService<Publication>{
     }
 
     @Override
+    public List<Publication> getAllByOrderIDDesc() {
+        return this.publicationRepository.findAllByOrderByIdDesc();
+    }
+
+    @Override
     public Publication modifier(Publication publicationUp, Long id) {
         Publication publicationBD=searchById(id);
 

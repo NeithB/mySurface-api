@@ -24,6 +24,11 @@ public class UserServiceImpl implements ObjectService<User> {
     }
 
     @Override
+    public List<User> getAllByOrderIDDesc() {
+        return null;
+    }
+
+    @Override
     public User modifier(User userUp, Long id) {
         User userBD=searchById(id);
 

@@ -1,4 +1,4 @@
-package shaks.trimer.mySurface.controllers;
+package shaks.trimer.mySurface.modeles;
 
 
 import lombok.*;

@@ -1,10 +1,12 @@
 package shaks.trimer.mySurface.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import shaks.trimer.mySurface.modeles.Publication;
+import shaks.trimer.mySurface.modeles.PublicationDTO;
 import shaks.trimer.mySurface.modeles.User;
+import shaks.trimer.mySurface.repository.PublicationRepository;
 import shaks.trimer.mySurface.services.PublicationServiceImpl;
 import shaks.trimer.mySurface.services.UserServiceImpl;
 
@@ -34,7 +36,7 @@ public class PublicationController {
     }
     @GetMapping
     public List<Publication> listPb(){
-        return publicationService.getAll();
+        return publicationService.getAllByOrderIDDesc();
     }
 
     @GetMapping("{id}")

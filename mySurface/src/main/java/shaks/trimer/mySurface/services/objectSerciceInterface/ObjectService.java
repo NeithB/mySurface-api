@@ -8,6 +8,8 @@ import java.util.List;
 public interface ObjectService <T>{
     T creer(T t);
      List<T>getAll();
+
+    List<T>getAllByOrderIDDesc();
     T modifier(T t, Long id);
     void supprimer(Long id);
     T searchById(Long id);
@@ -15,6 +17,7 @@ public interface ObjectService <T>{
     T searchByLogin(String login);
 
     T findByLoginAndMdp(String l, String m);
+
 
 
 }
