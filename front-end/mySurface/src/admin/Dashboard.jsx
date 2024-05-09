@@ -21,7 +21,6 @@ export default function Dashboard() {
     }
 
   
-
     useEffect(()=>{
         getAllUsers();
         if(!isLogged()){

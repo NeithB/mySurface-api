@@ -15,6 +15,7 @@ export default function Home() {
 const {register, handleSubmit,formState: { errors }} = useForm();
 const navigator=useNavigate();
 
+
 const onSubmit=(data)=>{
 
     connect(data.login,data.mdp).then((res)=>{
@@ -45,7 +46,7 @@ function signUp(){
 }
 
   return (
-    <div>
+    <div >
         <Stack alignItems={"center"}
             justifyContent={"center"}
             width={"100%"}

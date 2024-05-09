@@ -11,10 +11,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import {useNavigate } from 'react-router-dom'
+import { logout } from '../../connexionServices/connexionService';
+
 
 export default function Header() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState();
+
+  const navigator = useNavigate();
+
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -27,6 +33,11 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  function deconnexion(){
+    logout();
+    navigator("/")
+    
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -72,7 +83,7 @@ export default function Header() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={()=>deconnexion()}>Logout</MenuItem>
               </Menu>
             </div>
           )}

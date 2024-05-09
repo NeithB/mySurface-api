@@ -8,7 +8,11 @@ import Logon from './composants/user/Logon.jsx'
 import { Toaster } from 'react-hot-toast'
 import Dashboard from './admin/Dashboard.jsx'
 import Interface from './composants/home/Interface.jsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Commentaire from './composants/publication/Commentaire.jsx'
 
+const queryClient=new QueryClient();
 const route=createBrowserRouter([
   {
     path:"/",
@@ -28,13 +32,22 @@ const route=createBrowserRouter([
   {
     path:"/interface",
     element:<Interface/>
+  },
+  {
+    path:"/commentaire/:id",
+    element:<Commentaire/>
   }
+
 
 ])
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Toaster/>
-    <RouterProvider router={route}/>
+    <QueryClientProvider client={queryClient}>
+      <Toaster/>
+      <RouterProvider router={route}/>
+      <ReactQueryDevtools/>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

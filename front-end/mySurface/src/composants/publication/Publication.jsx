@@ -2,60 +2,56 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { createPub } from '../../axios/PublicationService'
-import Contenue from './Contenue'
 import toast from 'react-hot-toast'
-import { getPub } from '../../axios/PublicationService'
-
+import { useMutation,useQueryClient } from '@tanstack/react-query'
 
 export default function Publication() {
 
     const {register, handleSubmit,reset,formState: { errors },} = useForm()
-    const [pubs, setPubs]=useState([]) 
     const userL=JSON.parse(localStorage.getItem('user'))
-    
-useEffect(()=>{
-    getPub().then((res)=>{
-        setPubs(res.data)
-    })
-    
-},[])
 
 
-   
+
+const useQuery=useQueryClient()
+
+const mutation=useMutation({
+    mutationFn:(pub)=>{
+        return createPub(pub)
+    },
+    onError:(error)=>{
+        toast.error("Une erreur est survenue")
+    },
+    onSuccess:()=>{
+        reset()
+        useQuery.invalidateQueries("pubs")
+        toast.success("Publication effectuée")
+        
+    }
+})
+
     const onSubmit= (data) => {
         const publication={
             ...data,
             user_id:userL.id,
             nbreLike:0
         }
-        console.log(publication)
-        createPub(publication).then((res)=>{
-                    toast.success("Plubier avec succes")
-                    reset()
-        }).catch(error=>{
-            console.log(errors)
-            toast.error("Une erreur est survenue lors de la publication")
-            
-        })
+       mutation.mutate(publication)
 
     }
 
-  return ( 
-    <Box>
-        <Box height={"100vh"} >
-               
-                
+    
+
+  return (             
             <Stack  
-                    width={"50%"} 
+                    width={"70%"} 
                     alignItems={"center"} 
                     margin={"auto"} 
                     padding={"10px"}
                     direction={"column"}
                     gap={5}
                     
-                    >
-                
-                <Box width={"100%"} bgcolor={"#F1F1F1"} padding={2} >
+                    >                
+                <Box width={"100%"} bgcolor={"#F8F8F8"} padding={2} >
                     <form onSubmit={handleSubmit(onSubmit)} >
                     <Typography variant='h3'>Share your day</Typography>
                         <TextField id="outlined-basic" 
@@ -88,16 +84,9 @@ useEffect(()=>{
                         <Button className='mt-3' variant="contained" type="submit" fullWidth>Publier</Button>
                     </form>
                 </Box> 
-                        {pubs.length>0 &&                           
-                            pubs.map(pub=>  
-                                <>                                                      
-                                 <Contenue p={pub}/>
-                                </> 
-                         )}
-
+                        
             </Stack>     
-        </Box>
-    </Box>  
+      
 
 
 
