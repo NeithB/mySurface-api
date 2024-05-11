@@ -3,9 +3,6 @@ import Header from '../commun/Header'
 import Publication from '../publication/Publication'
 import { Avatar, Box, Stack, Typography } from '@mui/material'
 import { getPub } from '../../axios/PublicationService'
-import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { useQueryClient,useQuery, useMutation } from '@tanstack/react-query'
 import { deletUser } from '../../axios/UserService'
 import Contenue from '../publication/Contenue'
