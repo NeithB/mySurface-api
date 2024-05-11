@@ -15,48 +15,58 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 //
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column
     @NotBlank
     @Size(min=2,message = "saisir au moins 2 caracteres")
-    public String nom;
+    private String nom;
 
     @Column
     @NotBlank
     @Size(min=2, message = "saisir au moins 2 caracteres")
-    public String prenom;
+    private String prenom;
 
     @Column
     @NotBlank
     @Size(min=6, message = "saisir au moins 2 caracteres")
-    public String login;
+    private String login;
 
     @Column
     @NotBlank
     @Size(min=6, message = "saisir au moins 2 caracteres")
-    public String mdp;
+    private String mdp;
 
 
     @Column
     @Size(min=2, message = "saisir au moins 2 caracteres")
-    public String image;
+    private String image;
 
     @Column
-    public String statut="Client";
+    private String statut="Client";
 
 //    @OneToMany(mappedBy = "user")
-//
-//    public List<Publication> publicationList;
+//    private List<Publication> publicationList;
 
+//    @OneToMany(mappedBy = "user")
+//    private List<Commentaire> commentaireList;
 
-
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", login='" + login + '\'' +
+                ", mdp='" + mdp + '\'' +
+                ", image='" + image + '\'' +
+                ", statut='" + statut + '\'' +
+                '}';
+    }
 }

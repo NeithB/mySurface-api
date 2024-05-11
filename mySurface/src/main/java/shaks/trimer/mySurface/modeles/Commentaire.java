@@ -2,11 +2,15 @@ package shaks.trimer.mySurface.modeles;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Commentaire {
 
     @Id
@@ -24,5 +28,13 @@ public class Commentaire {
     @JoinColumn(name = "publication_id")
     private Publication publication;
 
-
+    @Override
+    public String toString() {
+        return "Commentaire{" +
+                "id=" + id +
+                ", contenu='" + contenu + '\'' +
+                ", user=" + user +
+                ", publication=" + publication +
+                '}';
+    }
 }

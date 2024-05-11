@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,11 +19,11 @@ public class Publication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column
     @Size(min=2, message = "saisir au moins 6 caracteres")
-    public String message;
+    private String message;
 
     @Column
     private LocalDate datePub=LocalDate.now();
@@ -36,5 +37,20 @@ public class Publication {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+//    @OneToMany(mappedBy = "publication")
+//    private List<Commentaire> commentaireList;
+
+    @Override
+    public String toString() {
+        return "Publication{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", datePub=" + datePub +
+                ", nbreLike=" + nbreLike +
+                ", url='" + url + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
 
