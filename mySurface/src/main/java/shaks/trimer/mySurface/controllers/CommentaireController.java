@@ -30,12 +30,9 @@ public class CommentaireController  {
         Commentaire commentaire=new Commentaire();
             Long pub_id=commentaireDTO.getIdPub();
             Long user_id=commentaireDTO.getIdUser();
-
-            commentaire.setId(commentaireDTO.getId());
             commentaire.setContenu(commentaireDTO.getContenu());
                      Publication publication=publicationService.searchById(pub_id);
                      User user=userService.searchById(user_id);
-
             commentaire.setPublication(publication);
             commentaire.setUser(user);
         return commentaireImpl.creer(commentaire);
@@ -46,7 +43,7 @@ public class CommentaireController  {
     }
     @GetMapping("/pub/{id}")
     public List<Commentaire> getALLBy(@PathVariable long id){
-        return commentaireRepository.findAllByPublicationByID(id);
+        return commentaireImpl.getAllbyPub(id);
     }
 
     @DeleteMapping("/{id}")

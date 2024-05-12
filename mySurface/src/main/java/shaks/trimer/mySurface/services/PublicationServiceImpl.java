@@ -61,5 +61,15 @@ public class PublicationServiceImpl implements ObjectService<Publication>{
         return null;
     }
 
+    @Override
+    public List<Publication> getAllbyPub(Long id) {
+        return null;
+    }
+
+    @Override
+    public Long nbre() {
+        return this.publicationRepository.count();
+    }
+
 
 }

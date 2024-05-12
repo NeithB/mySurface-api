@@ -9,4 +9,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     User findByLoginAndMdp(String login, String mdp);
 
 
+
 }

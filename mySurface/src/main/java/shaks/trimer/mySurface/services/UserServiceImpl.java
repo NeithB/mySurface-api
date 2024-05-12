@@ -59,4 +59,14 @@ public class UserServiceImpl implements ObjectService<User> {
     public User findByLoginAndMdp(String l, String m) {
         return userRepository.findByLoginAndMdp(l,m);
     }
+
+    @Override
+    public List<User> getAllbyPub(Long id) {
+        return null;
+    }
+
+    @Override
+    public Long nbre() {
+        return this.userRepository.count();
+    }
 }
