@@ -11,7 +11,7 @@ function CardCmnt({commentaires,pub}) {
   const user=JSON.parse(localStorage.getItem('user'))
   const {id}=useParams()
 
-  console.log(id)
+ 
 
 
   return (        

@@ -7,9 +7,11 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import dayjs from "dayjs";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deletePub } from '../../axios/PublicationService';
 import { useNavigate } from 'react-router-dom';
+import Publication from './Publication';
+import { createLike, getLike } from '../../axios/likeService';
 
 
 
@@ -20,7 +22,8 @@ export default function Contenue({pub}) {
 
   const navigator=useNavigate()
 
-  const useQuery=useQueryClient() 
+  const queryClient=useQueryClient() 
+
   const mutation=useMutation({
         mutationFn:(id)=>{
           return deletePub(id)
@@ -29,7 +32,7 @@ export default function Contenue({pub}) {
               toast.error("Une erreur est survenue")
           },
           onSuccess:()=>{
-              useQuery.invalidateQueries("pubs")
+              queryClient.invalidateQueries("pubs")
               toast.success("Suppression effectuée")    
           }
   })
@@ -40,7 +43,37 @@ export default function Contenue({pub}) {
   }
  function direction(id){
     navigator("/commentaire/"+id)
+
+
  }
+ const mute=useMutation({
+  mutationFn:(like)=>{
+      return createLike(like)
+  },
+  onError:(error)=>{
+      queryClient.invalidateQueries("pubs")
+      toast.error("Une erreur est survenue")
+  },
+  onSuccess:()=>{
+      toast.success("liker effectuée")
+      
+  }
+})
+ function liker(id){
+    const like={
+      idLikeUser : user.id,
+      idLikePub : id
+    }
+    console.log(like)
+    mute.mutate(like)
+    
+ }
+ const {data:likes}=useQuery({ 
+  queryKey:['likes'],
+  queryFn:()=>getLike()?.then((res)=>res.data),      
+  onerror:(error)=>console.log("Une erreur est survenue"+error),
+})
+
 
     return (
       <Box borderRadius={4} width={"100%"} bgcolor={"#F8F8F8"} padding={2} marginBottom={1}>
@@ -62,12 +95,16 @@ export default function Contenue({pub}) {
                                                    
                                   </Stack>
 
-                                      <Typography variant='P' sx={{marginLeft:"7px"}}>{pub.message}</Typography>                 
+                                  <Typography variant='P' sx={{marginLeft:"7px"}}>{pub.message}</Typography>                 
                                   <hr className=''/>                                 
                                   <img src={pub.url} width={"100%"}/>
+                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}><em>Nombre de Likes : <span className='text-primary' style={{fontWeight:'bold'}}>{likes}</span> </em></Typography>  
                                   <hr />
                                   <Stack direction={"row"} gap={10} padding={-10} alignItems={"center"} justifyContent={"center"}>
-                                          <p><a href="/" style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
+                                    {
+
+                                          <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
+                                    }
                                           <p ><a onClick={()=>direction(pub.id)}  style={{textDecoration:"none", color:"#646565"}}><ModeCommentOutlinedIcon/> commenter</a></p>
                                           <p style={{color:"#646565"}}><ReplyOutlinedIcon />Partager</p>
               
