@@ -21,8 +21,8 @@ function CardCmnt({commentaires,pub}) {
                     {                                         
                      commentaires?.map((ctr)=>
                       
-                    <Box>
-                        <Box className='card' padding={2} marginBottom={1}>
+                    <Box >
+                        <Box className='card'bgcolor={"#EEECEC"} padding={2} marginBottom={1}>
                                                     
               
                             <Stack direction={"row"} gap={1} >

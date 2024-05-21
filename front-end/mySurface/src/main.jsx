@@ -11,12 +11,18 @@ import Interface from './composants/home/Interface.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Commentaire from './composants/publication/Commentaire.jsx'
+import Page404 from './composants/Page404.jsx'
+
 
 const queryClient=new QueryClient();
 const route=createBrowserRouter([
   {
     path:"/",
     element:<App/>
+  },
+  {
+    path:"*",
+    element:<Page404/>
   },
   {
     path:"/logon",

@@ -4,13 +4,19 @@ import { useForm } from 'react-hook-form'
 import { createPub } from '../../axios/PublicationService'
 import toast from 'react-hot-toast'
 import { useMutation,useQueryClient } from '@tanstack/react-query'
+import { isLogged } from '../../connexionServices/connexionService'
+import { useNavigate } from 'react-router-dom'
 
 export default function Publication() {
 
     const {register, handleSubmit,reset,formState: { errors },} = useForm()
     const userL=JSON.parse(localStorage.getItem('user'))
 
+    const navigator=useNavigate()
 
+if(userL==null){
+    navigator("/")
+}
 
 const useQuery=useQueryClient()
 

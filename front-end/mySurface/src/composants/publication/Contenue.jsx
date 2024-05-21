@@ -11,7 +11,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deletePub } from '../../axios/PublicationService';
 import { useNavigate } from 'react-router-dom';
 import Publication from './Publication';
-import { createLike, getLike } from '../../axios/likeService';
+import { createLike, getExitLike } from '../../axios/likeService';
+
+
 
 
 
@@ -20,9 +22,12 @@ export default function Contenue({pub}) {
 
   const user=JSON.parse(localStorage.getItem('user'))
 
+
   const navigator=useNavigate()
 
   const queryClient=useQueryClient() 
+
+  const idPub=0;
 
   const mutation=useMutation({
         mutationFn:(id)=>{
@@ -37,15 +42,27 @@ export default function Contenue({pub}) {
           }
   })
 
+  const mutationLike=useMutation({
+    mutationFn:(idUser,idPub)=>{
+      return deleteLike(idUser,idPub)
+      },
+      onError:(error)=>{
+          toast.error("Une erreur est survenue")
+      }
+     
+})
+
+// Fonction supprimer 
   function supprimer(id){
     mutation.mutate(id)
     console.log(id)
   }
+  // Fonction commenter
  function direction(id){
     navigator("/commentaire/"+id)
-
-
  }
+
+ // Mutation pour la fonction liker
  const mute=useMutation({
   mutationFn:(like)=>{
       return createLike(like)
@@ -55,24 +72,26 @@ export default function Contenue({pub}) {
       toast.error("Une erreur est survenue")
   },
   onSuccess:()=>{
-      toast.success("liker effectuée")
-      
+      toast.success("liker effectuée")     
   }
+ 
 })
- function liker(id){
+
+ function liker(id){ 
     const like={
       idLikeUser : user.id,
-      idLikePub : id
+      idLikePub : id,
     }
-    console.log(like)
-    mute.mutate(like)
-    
+    mute.mutate(like)      
  }
- const {data:likes}=useQuery({ 
+
+const {data:existLike}=useQuery({ 
   queryKey:['likes'],
-  queryFn:()=>getLike()?.then((res)=>res.data),      
+  queryFn:()=>getExitLike(user.id,pub.id)?.then((res)=>res.data),      
   onerror:(error)=>console.log("Une erreur est survenue"+error),
 })
+
+console.log(existLike?.publication.id)
 
 
     return (
@@ -98,13 +117,15 @@ export default function Contenue({pub}) {
                                   <Typography variant='P' sx={{marginLeft:"7px"}}>{pub.message}</Typography>                 
                                   <hr className=''/>                                 
                                   <img src={pub.url} width={"100%"}/>
-                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}><em>Nombre de Likes : <span className='text-primary' style={{fontWeight:'bold'}}>{likes}</span> </em></Typography>  
+                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}><em>Nombre de Likes : <span className='text-primary' style={{fontWeight:'bold'}}>{pub.nbreLike}</span> </em></Typography>  
                                   <hr />
                                   <Stack direction={"row"} gap={10} padding={-10} alignItems={"center"} justifyContent={"center"}>
-                                    {
-
-                                          <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
-                                    }
+                                      {
+                                        existLike?.publication.statut==1 ? <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"blue"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
+                                                  :  <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
+                                                
+                                        }
+                                    
                                           <p ><a onClick={()=>direction(pub.id)}  style={{textDecoration:"none", color:"#646565"}}><ModeCommentOutlinedIcon/> commenter</a></p>
                                           <p style={{color:"#646565"}}><ReplyOutlinedIcon />Partager</p>
               

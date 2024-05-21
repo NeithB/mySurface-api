@@ -6,6 +6,7 @@ import { getPub } from '../../axios/PublicationService'
 import { useQueryClient,useQuery, useMutation } from '@tanstack/react-query'
 import { deletUser } from '../../axios/UserService'
 import Contenue from '../publication/Contenue'
+import Chargement from '../publication/Chargement'
 
 
 
@@ -40,7 +41,7 @@ const {data:pubs,isLoading,error}=useQuery({
 
 
 if(isLoading){
-  return <><h1>Chargement</h1></>
+  return  <Chargement/>
 }
 
 function supprimer(id){
