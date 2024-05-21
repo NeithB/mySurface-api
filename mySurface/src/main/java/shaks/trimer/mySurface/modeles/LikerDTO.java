@@ -16,6 +16,7 @@ public class LikerDTO {
     private Long id;
     private Long idLikeUser;
     private Long idLikePub;
+    private Boolean statut;
 
     @Override
     public String toString() {

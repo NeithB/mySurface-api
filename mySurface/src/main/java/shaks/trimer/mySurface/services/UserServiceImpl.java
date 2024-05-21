@@ -65,8 +65,4 @@ public class UserServiceImpl implements ObjectService<User> {
         return null;
     }
 
-    @Override
-    public Long nbre() {
-        return this.userRepository.count();
-    }
 }

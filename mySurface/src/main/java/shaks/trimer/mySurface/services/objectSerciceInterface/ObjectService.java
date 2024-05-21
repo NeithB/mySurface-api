@@ -18,7 +18,7 @@ public interface ObjectService <T>{
 
     T findByLoginAndMdp(String l, String m);
     List<T> getAllbyPub(Long id);
-    Long nbre();
+
 
 
 

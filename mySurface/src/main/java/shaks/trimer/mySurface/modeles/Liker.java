@@ -25,4 +25,6 @@ public class Liker {
     @JoinColumn(name = "publication_id")
     private Publication publication;
 
+    private Boolean statut=false;
+
 }

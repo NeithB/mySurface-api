@@ -60,8 +60,5 @@ public class CommentaireImpl implements ObjectService<Commentaire> {
     public List<Commentaire> getAllbyPub(Long id) {return this.commentaireRepository.findAllByPublicationByID(id);
     }
 
-    @Override
-    public Long nbre() {
-        return  this.commentaireRepository.count();
-    }
+
 }

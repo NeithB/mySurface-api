@@ -24,6 +24,9 @@ public class PublicationDTO {
 
     private String url;
 
+    private String image;
+
+
     private Long user_id;
 
 

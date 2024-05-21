@@ -31,9 +31,13 @@ public class LikerController {
             Long idUser=likeDTO.getIdLikeUser();
             Long idPub=likeDTO.getIdLikePub();
             User user=userService.searchById(idUser);
+            Boolean statut=true;
             Publication publication=publicationService.searchById(idPub);
        like.setUser(user);
        like.setPublication(publication);
+       like.setStatut(statut);
+
+       publication.setNbreLike(likerService.nbre(likeDTO.getIdLikePub()));
 
         return likerService.creer(like);
     }
@@ -42,13 +46,24 @@ public class LikerController {
     public List<Liker> getALL(){
         return likerService.getAll();
     }
-    @GetMapping("/nbreLike")
-    public Long nbreLike(){
-        return likerService.nbre();
-    }
+
     @GetMapping("/find/{idUser}/{idPub}")
-    public Long findByidUserAndIdPub(@PathVariable Long idUser, @PathVariable Long idPub){
-        return likerRepository.findByUserIDAndPublicationId(idUser,idUser);
+    public Liker findByidUserAndIdPub(@PathVariable Long idUser, @PathVariable Long idPub){
+        return likerService.exist(idUser,idPub);
+    }
+
+    @DeleteMapping("/delete/{idUser}/{idPub}")
+    public Liker deleteLike(@PathVariable Long idUser, @PathVariable Long idPub){
+        Liker like=likerService.deleteExist(idUser,idPub);
+
+        Publication publication=publicationService.searchById(idPub);
+        publication.setNbreLike(likerService.nbre(idPub));
+        return like;
+    }
+
+    @GetMapping("/find/{idPub}")
+    public Liker likeByPubId(@PathVariable Long idPub){
+        return likerService.likeByPubId(idPub);
     }
 
 

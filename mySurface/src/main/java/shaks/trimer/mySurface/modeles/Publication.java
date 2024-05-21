@@ -34,6 +34,9 @@ public class Publication {
     @Column
     private String url;
 
+    @Column
+    private String image;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;

@@ -27,6 +27,7 @@ public class PublicationController {
 
        User user=userService.searchById(pb.getUser_id());
                 pl.setUrl(pb.getUrl());
+                pl.setImage(pb.getImage());
                 pl.setDatePub(pb.getDatePub());
                 pl.setMessage(pb.getMessage());
                 pl.setUser(user);

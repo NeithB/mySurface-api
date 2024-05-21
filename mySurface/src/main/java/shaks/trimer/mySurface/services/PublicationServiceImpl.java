@@ -66,10 +66,6 @@ public class PublicationServiceImpl implements ObjectService<Publication>{
         return null;
     }
 
-    @Override
-    public Long nbre() {
-        return this.publicationRepository.count();
-    }
 
 
 }
