@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Commentaire from './composants/publication/Commentaire.jsx'
 import Page404 from './composants/Page404.jsx'
+import UpdateUser from './composants/user/UpdateUser.jsx'
 
 
 const queryClient=new QueryClient();
@@ -27,6 +28,10 @@ const route=createBrowserRouter([
   {
     path:"/logon",
     element:<Logon/>
+  },
+  {
+    path:"/upUser/:id",
+    element:<UpdateUser/>
   },
   {
     path:"/dashboard",

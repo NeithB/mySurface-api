@@ -91,7 +91,7 @@ const {data:existLike}=useQuery({
   onerror:(error)=>console.log("Une erreur est survenue"+error),
 })
 
-console.log(existLike?.publication.id)
+
 
 
     return (
@@ -117,12 +117,12 @@ console.log(existLike?.publication.id)
                                   <Typography variant='P' sx={{marginLeft:"7px"}}>{pub.message}</Typography>                 
                                   <hr className=''/>                                 
                                   <img src={pub.url} width={"100%"}/>
-                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}><em>Nombre de Likes : <span className='text-primary' style={{fontWeight:'bold'}}>{pub.nbreLike}</span> </em></Typography>  
-                                  <hr />
+                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}><em><span className='text-primary' style={{  }}>{pub.nbreLike} likes </span> </em></Typography>  
+                                  <hr style={{margin:'1px'}} />
                                   <Stack direction={"row"} gap={10} padding={-10} alignItems={"center"} justifyContent={"center"}>
                                       {
-                                        existLike?.publication.statut==1 ? <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"blue"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
-                                                  :  <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> Like</a></p>
+                                        existLike?.publication?.statut==1 ? <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"blue"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> J'aime</a></p>
+                                                  :  <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> J'aime</a></p>
                                                 
                                         }
                                     

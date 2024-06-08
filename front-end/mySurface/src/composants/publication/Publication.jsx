@@ -49,7 +49,7 @@ const mutation=useMutation({
 
   return (             
             <Stack  
-                    width={"70%"} 
+                    width={"90%"} 
                     alignItems={"center"} 
                     margin={"auto"} 
                     padding={"10px"}
@@ -59,21 +59,21 @@ const mutation=useMutation({
                     >                
                 <Box width={"100%"} bgcolor={"#F8F8F8"} padding={2} >
                     <form onSubmit={handleSubmit(onSubmit)} >
-                    <Typography variant='h3'>Share your day</Typography>
+                
                         <TextField id="outlined-basic" 
                         label="Parlez de votre journée" 
                         variant="outlined"
                         fullWidth
                         type='text'
                         multiline
-                            rows={4}
-                        size='small'
+                            rows={2}
+                        size='small'                       
                         sx={{marginBottom:"10px"}}
                         {...register("message",{
                             required:"Veillez saiser quelques mots",
                             minLength:{value:"5",message:"Veillez saisir au moins 5 caracters"}
                         })}
-
+                        
                         />
                         <TextField id="outlined-basic" 
                         label="url de l'image" 
@@ -87,7 +87,7 @@ const mutation=useMutation({
                             minLength:{value:"2",message:"Veillez saisir au moins 2 caracters"}
                         })}
                         />
-                        <Button className='mt-3' variant="contained" type="submit" fullWidth>Publier</Button>
+                        <Button className='mt-1' variant="contained" type="submit" fullWidth>Publier</Button>
                     </form>
                 </Box> 
                         

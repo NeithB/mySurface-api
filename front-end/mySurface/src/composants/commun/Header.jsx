@@ -19,6 +19,8 @@ export default function Header() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState();
 
+  const user=JSON.parse(localStorage.getItem('user'))
+
   const navigator = useNavigate();
 
 
@@ -37,6 +39,9 @@ export default function Header() {
     logout();
     navigator("/")
     
+  }
+  function dashboard(){
+    navigator("/dashboard")
   }
 
   return (
@@ -83,6 +88,10 @@ export default function Header() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
+                {
+                  user.statut=='admin' &&
+                <MenuItem onClick={()=>dashboard()}>Dashboard</MenuItem>
+                }
                 <MenuItem onClick={()=>deconnexion()}>Logout</MenuItem>
               </Menu>
             </div>

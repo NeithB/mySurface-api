@@ -58,10 +58,7 @@ function signUp(){
             <Box width={500}>
 
             <Typography variant='h2' color={"#218DA0 "}>mySurface</Typography>
-            <Typography variant='h6'>Partgez votre quotidien avec vos proches</Typography>
-                <Link className='btn btn-primary' to="/dashboard"> Dashboard</Link>
-                
-
+            <Typography variant='h6'>Partgez votre quotidien avec vos proches</Typography>               
             </Box>
 
             <Box width={500}
