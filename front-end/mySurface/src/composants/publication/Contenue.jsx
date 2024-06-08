@@ -55,7 +55,6 @@ export default function Contenue({pub}) {
 // Fonction supprimer 
   function supprimer(id){
     mutation.mutate(id)
-    console.log(id)
   }
   // Fonction commenter
  function direction(id){
@@ -85,6 +84,7 @@ export default function Contenue({pub}) {
     mute.mutate(like)      
  }
 
+
 const {data:existLike}=useQuery({ 
   queryKey:['likes'],
   queryFn:()=>getExitLike(user.id,pub.id)?.then((res)=>res.data),      
@@ -95,14 +95,17 @@ const {data:existLike}=useQuery({
 
 
     return (
-      <Box borderRadius={4} width={"100%"} bgcolor={"#F8F8F8"} padding={2} marginBottom={1}>
+                <Box  borderRadius={4} 
+                      width={"100%"} 
+                      bgcolor={"#F8F8F8"} 
+                      padding={2} 
+                      marginBottom={1}>
 
                                   <Stack direction={"row"} gap={2} padding={0}>                       
                                       <Avatar src=""/>
                                       <Typography variant='h6' sx={{marginTop:"2px", marginBottom:"15px"}}>{pub.user?.nom} {pub.user?.prenom}  </Typography> 
-                                      <Typography variant='p' sx={{marginTop:"7px", marginBottom:"15px",marginLeft:5, color:"#90A9B6"}}><em>{         
-                                        dayjs(pub.datePub).format("dddd, d MMM YYYY")             
-                                        }</em></Typography> 
+                                      <Typography variant='p' sx={{marginTop:"7px", marginBottom:"15px",marginLeft:5, color:"#90A9B6"}}>
+                                        <em>{ dayjs(pub.datePub).format("dddd, d MMM YYYY") }</em></Typography> 
                                         {       
                                           user.id==pub.user.id && 
                                         
@@ -115,9 +118,11 @@ const {data:existLike}=useQuery({
                                   </Stack>
 
                                   <Typography variant='P' sx={{marginLeft:"7px"}}>{pub.message}</Typography>                 
-                                  <hr className=''/>                                 
+                                  <hr/>                                 
                                   <img src={pub.url} width={"100%"}/>
-                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}><em><span className='text-primary' style={{  }}>{pub.nbreLike} likes </span> </em></Typography>  
+                                  <Typography variant='P'  sx={{margin:"auto", color:"#646565"}}>
+                                       <em><span className='text-primary'>{pub.nbreLike} likes </span> </em>
+                                  </Typography>  
                                   <hr style={{margin:'1px'}} />
                                   <Stack direction={"row"} gap={10} padding={-10} alignItems={"center"} justifyContent={"center"}>
                                       {

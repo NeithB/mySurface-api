@@ -22,41 +22,31 @@ function CardCmnt({commentaires,pub}) {
                      commentaires?.map((ctr)=>
                       
                     <Box >
-                        <Box className='card'bgcolor={"#EEECEC"} padding={2} marginBottom={1}>
+                        <Box className='card'bgcolor={"#EEECEC"}  marginBottom={1}>
                                                     
               
-                            <Stack direction={"row"} gap={1} >
+                            <Stack direction={"row"} gap={1} padding={1} >
                                 <Avatar src=""/> 
                                 <Typography variant='p' sx={{fontWeight:"Bold", marginTop:1}}>{ctr.user?.prenom} {ctr.user?.nom}</Typography>
-                                <Typography variant="p" sx={{ marginBottom:"15px",marginLeft:5, color:"#90A9B6",marginTop:1}} ><em>{dayjs(pub?.datePub).format("dddd, d MMM YYYY")  }</em></Typography>
-                            </Stack>
-                            <Stack>
-                                <Typography variant="p" className='text-center'>{ctr.contenu}</Typography>
-                            </Stack>
-                            <Typography variant="p" sx={{ marginBottom:"15px",color:"#90A9B6",marginTop:1}} className='text-center' >
+                                <Typography variant="p" sx={{marginTop:1}} className='text-center'>{ctr.contenu}</Typography>
+                                <Typography variant="p" sx={{marginLeft:5, color:"#90A9B6",marginBottom:3}} ><em>{dayjs(pub?.datePub).format("dddd, d MMM YYYY")  }</em></Typography>
+                                <span style={{marginLeft:"25%"}}>
+                                {
 
-                            ----------------------------------------------------------------------------------------------------
-                            </Typography>
-                         
-                            <Stack direction={"row"} margin={"auto"}>
-                              {
-
-                                user.id==ctr.user.id && 
-                              <IconButton aria-label="delete">
-                                <DeleteIcon />
-                              </IconButton>
-                              }
-                              {
+                                  user.id==ctr.user.id && (
+                                  <IconButton aria-label="delete" >
+                                  <DeleteIcon fontSize='small' />
+                                  </IconButton>
+                                  )
+                                  }
+                                  {
                                 user.id==ctr.user.id && 
                                 <IconButton aria-label="delete">
-                                <EditIcon />
+                                <EditIcon fontSize='small' />
                                 </IconButton>
                               }
-                             
-                             
-
-                            </Stack>
-
+                              </span>
+                            </Stack>                                                                                                   
                         </Box>
                             
                     </Box>                                       

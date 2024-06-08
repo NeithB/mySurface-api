@@ -67,15 +67,17 @@ function supprimer(id){
                                 height={"50vh"}
                                 alignItems={"center"}                       
                                 padding={"10px"}
-                                Box borderRadius={4}>
+                                borderRadius={4}>
+
+
                               <p style={{margin:'auto', color:'#3C5D85'}} className='text-center'>Profil</p>     
                               <hr />
-                              <Box>
+                              <div>
                                 <Avatar src="" style={{margin:"auto"}}/>
                                 <p className='mt-3 fw-bold' style={{backgroundColor:"#56D661", borderRadius:"6px",width:"45%",padding:"4px",margin:"auto"}} >{user.prenom} {user.nom}</p>
-                              </Box>
+                              </div>
                                
-                              <p class="text-end">
+                              <p className="text-end">
                                 <em>
                                 <EditIcon className='text-primary' />
                                 </em>
@@ -94,7 +96,7 @@ function supprimer(id){
                                 height={"50vh"}
                                 alignItems={"center"}                       
                                 padding={"10px"}
-                                Box borderRadius={4}>
+                                borderRadius={4}>
                                 <Box>
                                   <p style={{margin:'auto', color:'#3C5D85'}} className='text-center'>Block</p>                     
                                 </Box>
@@ -115,8 +117,8 @@ function supprimer(id){
                     <Box>
                         <Publication/>                               
                         <Box padding={2}  sx={{margin:"auto"}} width={"90%"} >    
-                            { pubs.map((pub)=> 
-                            <Contenue pub={pub}/>                                                   
+                            { pubs?.map((pub)=> 
+                            <Contenue key={pub.id} pub={pub}/>                                                   
                             )}
                         </Box> 
                     </Box>
@@ -127,7 +129,7 @@ function supprimer(id){
                         height={"80vh"}
                         alignItems={"center"}                       
                         padding={"20px"}
-                        Box borderRadius={4}>
+                        borderRadius={4}>
                        <Box>
                         <p style={{margin:'auto', color:'#3C5D85'}} className='text-center'>Informations</p>                     
                       </Box>

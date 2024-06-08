@@ -18,6 +18,7 @@ if(userL==null){
     navigator("/")
 }
 
+console.log(userL.nom)
 const useQuery=useQueryClient()
 
 const mutation=useMutation({
