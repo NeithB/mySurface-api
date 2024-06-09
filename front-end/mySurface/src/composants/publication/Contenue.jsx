@@ -11,7 +11,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deletePub } from '../../axios/PublicationService';
 import { useNavigate } from 'react-router-dom';
 import Publication from './Publication';
-import { createLike, getExitLike } from '../../axios/likeService';
+import { createLike,deleteLike,getLikeExist } from '../../axios/likeService';
 
 
 
@@ -42,15 +42,15 @@ export default function Contenue({pub}) {
           }
   })
 
-  const mutationLike=useMutation({
-    mutationFn:(idUser,idPub)=>{
-      return deleteLike(idUser,idPub)
-      },
-      onError:(error)=>{
-          toast.error("Une erreur est survenue")
-      }
+//   const mutationLike=useMutation({
+//     mutationFn:(idUser,idPub)=>{
+//       return deleteLike(idUser,idPub)
+//       },
+//       onError:(error)=>{
+//           toast.error("Une erreur est survenue")
+//       }
      
-})
+// })
 
 // Fonction supprimer 
   function supprimer(id){
@@ -76,20 +76,44 @@ export default function Contenue({pub}) {
  
 })
 
- function liker(id){ 
+
+const mutes=useMutation({
+  mutationFn:(id)=>{
+      return deleteLike(id)
+  },
+  onError:(error)=>{
+      queryClient.invalidateQueries("pubs")
+      toast.error("Une erreur est survenue")
+  },
+  onSuccess:()=>{
+      toast.success("liker effectuée")     
+  }
+ 
+})
+
+
+ function liker(id){
+
     const like={
       idLikeUser : user.id,
       idLikePub : id,
-    }
-    mute.mutate(like)      
+    } 
+    getLikeExist(user.id,id).then((res)=>{
+      console.log(pub.nbreLike)
+      if(res.data){  
+        console.log("suppression")      
+        mutes.mutate(res.data.id);
+      }else{
+        console.log("suppression")  
+        mute.mutate(like);          
+      }
+    });
+
+        
  }
 
 
-const {data:existLike}=useQuery({ 
-  queryKey:['likes'],
-  queryFn:()=>getExitLike(user.id,pub.id)?.then((res)=>res.data),      
-  onerror:(error)=>console.log("Une erreur est survenue"+error),
-})
+
 
 
 
@@ -125,11 +149,15 @@ const {data:existLike}=useQuery({
                                   </Typography>  
                                   <hr style={{margin:'1px'}} />
                                   <Stack direction={"row"} gap={10} padding={-10} alignItems={"center"} justifyContent={"center"}>
-                                      {
-                                        existLike?.publication?.statut==1 ? <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"blue"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> J'aime</a></p>
-                                                  :  <p><a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"#646565"}}>< ThumbUpOutlinedIcon sx={{color:"##626263"}}/> J'aime</a></p>
+                                      
+                                    <p>
+                                      <a onClick={()=>liker(pub.id)} style={{textDecoration:"none", color:"blue"}}>
+                                        < ThumbUpOutlinedIcon sx={{color:"##626263"}}/> J'aime
+                                      </a>
+                                    </p>
+                                                 
                                                 
-                                        }
+                                        
                                     
                                           <p ><a onClick={()=>direction(pub.id)}  style={{textDecoration:"none", color:"#646565"}}><ModeCommentOutlinedIcon/> commenter</a></p>
                                           <p style={{color:"#646565"}}><ReplyOutlinedIcon />Partager</p>

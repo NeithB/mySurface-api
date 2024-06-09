@@ -47,9 +47,6 @@ if(isLoading){
 
 function supprimer(id){
   mutation.mutate(id)
-  console.log(id);
-  
-
 }
 
 
