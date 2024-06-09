@@ -3,8 +3,6 @@ package shaks.trimer.mySurface.services.objectSerciceInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import shaks.trimer.mySurface.modeles.Liker;
-import shaks.trimer.mySurface.modeles.Publication;
-import shaks.trimer.mySurface.modeles.User;
 import shaks.trimer.mySurface.repository.LikerRepository;
 
 import java.util.List;
@@ -61,16 +59,22 @@ public class LikerServiceImpl implements ObjectService<Liker> {
     public List<Liker> getAllbyPub(Long id) {
         return null;
     }
-    public int nbre(Long idPub) {
-        return Math.toIntExact(likerRepository.nbreLike(idPub));
+    public Long nbre(Long idPub) {
+        return likerRepository.nbreLike(idPub);
     }
     public Liker likeByPubId(Long idPub) {
         return likerRepository.findByPublicationId(idPub);
     }
+
+    public Long getAllyPubId(Long id){
+        int nb= likerRepository.findAllByPublicationId(id).size();
+        return (long) nb;
+
+    }
     public Liker exist(Long idUser, Long idPub){
         return likerRepository.findByLike(idUser,idPub);
     }
-    public Liker deleteExist(Long idUser, Long idPub){
-        return likerRepository.deleteLike(idUser,idPub);
+    public void deleteExist(Long idLike){
+        likerRepository.deleteLike(idLike);
     }
 }

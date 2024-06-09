@@ -34,7 +34,7 @@ public class UserServiceImpl implements ObjectService<User> {
 
             userBD.setNom(userUp.getNom());
             userBD.setPrenom(userUp.getPrenom());
-            userBD.setMdp(userUp.getMdp());
+
 
         return creer(userBD);
     }
@@ -43,23 +43,18 @@ public class UserServiceImpl implements ObjectService<User> {
     public void supprimer(Long id) {
         this.userRepository.deleteById(id);
     }
-
     @Override
     public User searchById(Long id) {
         return this.userRepository.findById(id).orElseThrow(()->new RuntimeException("Utilisateur non trouvé"));
     }
-
-
     @Override
     public User searchByLogin(String login) {
         return this.userRepository.findByLogin(login);
     }
-
     @Override
     public User findByLoginAndMdp(String l, String m) {
         return userRepository.findByLoginAndMdp(l,m);
     }
-
     @Override
     public List<User> getAllbyPub(Long id) {
         return null;

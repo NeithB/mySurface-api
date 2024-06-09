@@ -19,7 +19,7 @@ public class PublicationDTO {
     private LocalDate datePub=LocalDate.now();
 
 
-    private int nbreLike;
+    private Long nbreLike;
 
 
     private String url;

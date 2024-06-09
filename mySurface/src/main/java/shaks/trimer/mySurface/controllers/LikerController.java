@@ -26,20 +26,23 @@ public class LikerController {
 
     @PostMapping
     public Liker creer(@RequestBody  LikerDTO likeDTO){
-        System.out.print(likeDTO);
        Liker like=new Liker();
             Long idUser=likeDTO.getIdLikeUser();
             Long idPub=likeDTO.getIdLikePub();
             User user=userService.searchById(idUser);
             Boolean statut=true;
             Publication publication=publicationService.searchById(idPub);
-       like.setUser(user);
-       like.setPublication(publication);
-       like.setStatut(statut);
+               like.setUser(user);
+               like.setPublication(publication);
+               like.setStatut(statut);
 
-       publication.setNbreLike(likerService.nbre(likeDTO.getIdLikePub()));
+                Liker lik=likerService.creer(like);
 
-        return likerService.creer(like);
+                Long nbr=likerService.getAllyPubId(idPub);
+                publication.setNbreLike(nbr);
+                publicationService.modifier(publication,publication.getId());
+
+        return lik;
     }
 
     @GetMapping
@@ -48,19 +51,20 @@ public class LikerController {
     }
 
     @GetMapping("/find/{idUser}/{idPub}")
-    public Liker findByidUserAndIdPub(@PathVariable Long idUser, @PathVariable Long idPub){
+    public Liker findByIdUserAndIdPub(@PathVariable Long idUser, @PathVariable Long idPub){
         return likerService.exist(idUser,idPub);
     }
 
-    @DeleteMapping("/delete/{idUser}/{idPub}")
-    public Liker deleteLike(@PathVariable Long idUser, @PathVariable Long idPub){
-        Liker like=likerService.deleteExist(idUser,idPub);
+    /*
+    @DeleteMapping("/delete/{idLike}/{idPub}")
+    public void deleteLike(@PathVariable Long idLike, @PathVariable Long idPub){
+        likerService.deleteExist(idLike);
 
         Publication publication=publicationService.searchById(idPub);
         publication.setNbreLike(likerService.nbre(idPub));
-        return like;
+        publicationService.modifier(publication,publication.getId());
     }
-
+*/
     @GetMapping("/find/{idPub}")
     public Liker likeByPubId(@PathVariable Long idPub){
         return likerService.likeByPubId(idPub);
@@ -69,7 +73,18 @@ public class LikerController {
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable long id){
+        System.out.print("dans delete like");
+        Liker like=likerService.searchById(id);
+        Long idPub=like.getPublication().getId();
+
+        Publication publication=publicationService.searchById(idPub);
+
         likerService.supprimer(id);
+
+        Long nbr= likerService.nbre(idPub);
+        publication.setNbreLike(nbr);
+        publicationService.modifier(publication,publication.getId());
+
     }
     @PutMapping("/update/{id}")
     public Liker update(@RequestBody Liker like, @PathVariable long id){

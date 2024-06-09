@@ -17,13 +17,15 @@ public interface LikerRepository extends JpaRepository<Liker,Long> {
     @Query(value="select * from liker  where user_id =:idUser and publication_id=:idPub limit 1",nativeQuery = true )
     Liker findByLike(@Param("idUser") Long idUser, @Param("idPub") Long idPub);
 
-    @Query(value="delete from liker  where user_id =:idUser and publication_id=:idPub limit 1",nativeQuery = true )
-    Liker deleteLike(@Param("idUser") Long idUser, @Param("idPub") Long idPub);
+   @Query(value="delete from liker  where id =:idLike",nativeQuery = true )
+   void deleteLike(@Param("idLike") Long idLike);
     @Query(value="select * from liker  where publication_id=:idPub Limit 1" ,nativeQuery = true )
     Liker findByPublicationId(@Param("idPub") Long idPub);
 
-    @Query(value="select count(id)+1 from liker  where publication_id=:idPub",nativeQuery = true )
+    @Query(value="select count(id) from liker  where publication_id=:idPub",nativeQuery = true )
     Long nbreLike(@Param("idPub") Long idPub);
+
+    List<Liker> findAllByPublicationId(Long id);
 
 
 

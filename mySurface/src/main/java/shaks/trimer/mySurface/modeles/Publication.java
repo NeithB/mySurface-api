@@ -29,7 +29,7 @@ public class Publication {
     private LocalDate datePub=LocalDate.now();
 
     @Column
-    private int nbreLike;
+    private Long nbreLike;
 
     @Column
     private String url;
